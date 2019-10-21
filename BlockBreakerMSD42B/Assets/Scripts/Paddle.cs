@@ -21,13 +21,11 @@ public class Paddle : MonoBehaviour
        //this gives me the position of the mouse in the x-axis
        float mousePos = Input.mousePosition.x / Screen.width * screenWidthInUnits;
 
-       //paddlePosition = new Vector2(mousePos, transform.position.y);
-       
-       //set the x pposition of the paddle according to the mouse 
-       paddlePosition.x = mousePos;
-       
+       //set the x position of the paddle according to the mouse 
+       paddlePosition.x = Mathf.Clamp(mousePos, 1f, 15f);
+               
         //sets the current paddlePosition
-       transform.position = paddlePosition;
+        transform.position = paddlePosition;
 
     }
 }
