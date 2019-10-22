@@ -8,6 +8,8 @@ public class Ball : MonoBehaviour
 
     Vector2 paddleToBallDistance;
 
+    bool hasStarted = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,10 +19,30 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!hasStarted) // hasStarted == false
+        {
+            LockBallToPaddle();
+            LaunchBallOnClick();
+        }
+
+    }
+
+    private void LaunchBallOnClick()
+    {
+        //if left click is pressed
+        if (Input.GetMouseButtonDown(0))
+        {
+            hasStarted = true;
+            //shoot the ball
+            this.GetComponent<Rigidbody2D>().velocity = new Vector2(2f, 15f);
+        }
+    }
+
+    private void LockBallToPaddle()
+    {
         Vector2 paddlePosition = myPaddle.transform.position;
 
         //set the Ball position to the paddlePosition + distance
         this.transform.position = paddlePosition + paddleToBallDistance;
-
     }
 }
